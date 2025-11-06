@@ -1,39 +1,45 @@
-import {
-  Alert,
-  Box,
-  CircularProgress,
-  List,
-  ListItem,
-  Typography,
-} from '@mui/material';
+import { Alert, Box, CircularProgress, Typography, Grid } from '@mui/material';
 import { useChampionBootstrap } from '../hooks';
+import { ChampionCard } from './ChampionCard';
 
 export default function ChampionGrid() {
   const { version, list, loading, error } = useChampionBootstrap();
 
-  if (loading) return <CircularProgress />;
+  if (loading) {
+    return (
+      <Box sx={{ display: 'grid', placeItems: 'center', py: 6 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
   if (error) return <Alert severity='error'>Failed to load champions.</Alert>;
   if (!version || !list) return null;
 
   return (
     <Box>
       <Typography
-        variant='h6'
-        gutterBottom
+        variant='h5'
+        sx={{ mb: 2 }}
       >
         Patch {version} • {list.length} champions
       </Typography>
-      <List dense>
-        {list.slice(0, 20).map((c) => (
-          <ListItem key={c.key}>{c.name}</ListItem>
-        ))}
-      </List>
-      <Typography
-        variant='body2'
-        color='text.secondary'
+
+      <Grid
+        container
+        spacing={2}
       >
-        (Showing first 20 for now )
-      </Typography>
+        {list.map((ch) => (
+          <Grid
+            key={ch.key}
+            size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+          >
+            <ChampionCard
+              champion={ch}
+              version={version}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 }

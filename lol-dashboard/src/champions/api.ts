@@ -14,6 +14,5 @@ export async function getChampions(
   const { data } = await http.get(
     `${CDN}/cdn/${version}/data/en_US/champion.json`
   );
-  // API returns { data: { [id]: ChampionSummary } }
   return Object.values<ChampionSummary>(data.data);
 }
