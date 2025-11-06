@@ -9,7 +9,7 @@ export const theme = createTheme({
   },
   shape: { borderRadius: 10 },
   typography: {
-    fontFamily: `"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif`,
+    fontFamily: `"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif`,
     h1: {
       fontFamily: `"Cinzel", serif`,
       fontWeight: 700,
@@ -25,11 +25,47 @@ export const theme = createTheme({
       fontWeight: 600,
       letterSpacing: '.01em',
     },
-
+    h4: { fontFamily: `"Cinzel", serif`, fontWeight: 600 },
+    h5: { fontFamily: `"Cinzel", serif`, fontWeight: 600 },
+    h6: { fontFamily: `"Cinzel", serif`, fontWeight: 600 },
     button: {
       textTransform: 'uppercase',
       letterSpacing: '.06em',
       fontWeight: 700,
+    },
+  },
+
+  components: {
+    // Regular <Button />
+    MuiButton: {
+      styleOverrides: {
+        root: { fontFamily: `"Cinzel", serif` },
+      },
+    },
+    // <<< Toggle buttons use this >>>
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: `"Cinzel", serif`,
+          textTransform: 'uppercase',
+          letterSpacing: '.06em',
+          fontWeight: 700,
+          // optional: tighter feel
+          paddingInline: 12,
+          borderRadius: 8,
+        },
+      },
+    },
+    // Optional: keep ToggleButtonGroup borders subtle
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        grouped: {
+          borderColor: 'rgba(255,255,255,0.14)',
+          '&.Mui-selected': {
+            borderColor: 'rgba(255,255,255,0.28)',
+          },
+        },
+      },
     },
   },
 });

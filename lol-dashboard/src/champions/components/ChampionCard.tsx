@@ -7,16 +7,28 @@ import {
   Stack,
   Typography,
   Box,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import type { ChampionSummary } from '../types';
 
 type Props = {
   champion: ChampionSummary;
   version: string;
   onClick?: () => void;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
 };
 
-export function ChampionCard({ champion, version, onClick }: Props) {
+export function ChampionCard({
+  champion,
+  version,
+  onClick,
+  isFavorite,
+  onToggleFavorite,
+}: Props) {
   const img = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`;
 
   return (
@@ -40,6 +52,36 @@ export function ChampionCard({ champion, version, onClick }: Props) {
             alt={champion.name}
             loading='lazy'
           />
+
+          {/* Favorite icon (top-left) */}
+          {onToggleFavorite && (
+            <Tooltip
+              title={isFavorite ? 'Remove favorite' : 'Add to favorites'}
+            >
+              <IconButton
+                size='small'
+                onClick={(e) => {
+                  e.stopPropagation(); // don't trigger card click
+                  onToggleFavorite();
+                }}
+                sx={{
+                  position: 'absolute',
+                  top: 8,
+                  left: 8,
+                  bgcolor: 'rgba(0,0,0,.5)',
+                  border: '1px solid rgba(255,255,255,.2)',
+                  '&:hover': { bgcolor: 'rgba(0,0,0,.65)' },
+                }}
+              >
+                {isFavorite ? (
+                  <FavoriteIcon color='secondary' />
+                ) : (
+                  <FavoriteBorderIcon />
+                )}
+              </IconButton>
+            </Tooltip>
+          )}
+
           <Chip
             label={
               champion.info.difficulty >= 7
