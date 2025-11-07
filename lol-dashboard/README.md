@@ -94,10 +94,6 @@ The app provides an interactive dashboard to browse champions, view details, man
   └── index.css             # Global styling
 ```
 
-- **Performance:**
-- Memoized components (`React.memo`) to avoid unnecessary re-renders.
-- `useTransition` + `useDeferredValue` for smooth filtering.
-- Fully responsive for desktop and mobile.
 
 ---
 
