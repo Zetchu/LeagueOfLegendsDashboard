@@ -33,6 +33,7 @@ export function ChampionCard({
 
   return (
     <Card
+      data-testid={`champ-card-${champion.id}`}
       variant='outlined'
       sx={{
         position: 'relative',

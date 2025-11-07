@@ -3,5 +3,9 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+    "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
+  }
 }
