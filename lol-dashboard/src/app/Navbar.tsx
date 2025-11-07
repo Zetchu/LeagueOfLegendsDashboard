@@ -20,10 +20,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 const NAV_LINKS = [
   { to: '/', label: 'Champions' },
-  { to: '/items', label: 'Items' },
-  { to: '/runes', label: 'Runes' },
-  { to: '/compare', label: 'Compare' },
-  { to: '/favorites', label: 'Favorites' },
+  // { to: '/items', label: 'Items' },
+  // { to: '/runes', label: 'Runes' },
+  // { to: '/compare', label: 'Compare' },
+  // { to: '/favorites', label: 'Favorites' },
 ];
 
 function ActiveLinkButton({

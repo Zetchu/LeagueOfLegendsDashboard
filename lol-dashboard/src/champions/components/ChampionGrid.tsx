@@ -19,6 +19,7 @@ import { useChampionBootstrap } from '../hooks';
 import { ChampionCard } from './ChampionCard';
 import type { ChampionTag } from '../types';
 import { useFavorites } from '../../favorites'; // <-- import the modlet
+import { ChampionDialog } from './ChampionDialog';
 
 const CLASSES: ChampionTag[] = [
   'Assassin',
@@ -35,6 +36,7 @@ export default function ChampionGrid() {
   const [query, setQuery] = useState('');
   const [onlyFavs, setOnlyFavs] = useState(false);
   const { ids: favIds, isFavorite, toggleFavorite } = useFavorites();
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     if (!list) return [];
@@ -62,7 +64,6 @@ export default function ChampionGrid() {
 
   return (
     <Box>
-      {/* Top bar */}
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         alignItems={{ xs: 'stretch', sm: 'center' }}
@@ -84,7 +85,7 @@ export default function ChampionGrid() {
               value={selected ?? ''}
               exclusive
               onChange={(_, val: ChampionTag | 'All' | null) => {
-                if (val !== null) setSelected(val); // don't allow null deselect
+                if (val !== null) setSelected(val);
               }}
               size='small'
               color='primary'
@@ -215,11 +216,20 @@ export default function ChampionGrid() {
                   version={version}
                   isFavorite={isFavorite(ch.id)}
                   onToggleFavorite={() => toggleFavorite(ch.id)}
+                  onClick={() => setOpenId(ch.id)}
                 />
               </Grid>
             ))}
           </Grid>
         </>
+      )}
+      {openId && (
+        <ChampionDialog
+          open={Boolean(openId)}
+          onClose={() => setOpenId(null)}
+          version={version}
+          championId={openId}
+        />
       )}
     </Box>
   );
