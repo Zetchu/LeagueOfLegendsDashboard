@@ -36,13 +36,12 @@ export const theme = createTheme({
   },
 
   components: {
-    // Regular <Button />
     MuiButton: {
       styleOverrides: {
         root: { fontFamily: `"Cinzel", serif` },
       },
     },
-    // <<< Toggle buttons use this >>>
+
     MuiToggleButton: {
       styleOverrides: {
         root: {
@@ -56,7 +55,7 @@ export const theme = createTheme({
         },
       },
     },
-    // Optional: keep ToggleButtonGroup borders subtle
+
     MuiToggleButtonGroup: {
       styleOverrides: {
         grouped: {

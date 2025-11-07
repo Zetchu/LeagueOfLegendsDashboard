@@ -35,6 +35,7 @@ export function ChampionCard({
     <Card
       variant='outlined'
       sx={{
+        position: 'relative',
         height: '100%',
         transition: 'transform .12s ease, box-shadow .12s ease',
         '&:hover': { transform: 'translateY(-2px)', boxShadow: 6 },
@@ -52,35 +53,6 @@ export function ChampionCard({
             alt={champion.name}
             loading='lazy'
           />
-
-          {/* Favorite icon (top-left) */}
-          {onToggleFavorite && (
-            <Tooltip
-              title={isFavorite ? 'Remove favorite' : 'Add to favorites'}
-            >
-              <IconButton
-                size='small'
-                onClick={(e) => {
-                  e.stopPropagation(); // don't trigger card click
-                  onToggleFavorite();
-                }}
-                sx={{
-                  position: 'absolute',
-                  top: 8,
-                  left: 8,
-                  bgcolor: 'rgba(0,0,0,.5)',
-                  border: '1px solid rgba(255,255,255,.2)',
-                  '&:hover': { bgcolor: 'rgba(0,0,0,.65)' },
-                }}
-              >
-                {isFavorite ? (
-                  <FavoriteIcon color='secondary' />
-                ) : (
-                  <FavoriteBorderIcon />
-                )}
-              </IconButton>
-            </Tooltip>
-          )}
 
           <Chip
             label={
@@ -133,6 +105,32 @@ export function ChampionCard({
           </Stack>
         </CardContent>
       </CardActionArea>
+
+      {onToggleFavorite && (
+        <Tooltip title={isFavorite ? 'Remove favorite' : 'Add to favorites'}>
+          <IconButton
+            size='small'
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite();
+            }}
+            sx={{
+              position: 'absolute',
+              top: 8,
+              left: 8,
+              bgcolor: 'rgba(0,0,0,.5)',
+              border: '1px solid rgba(255,255,255,.2)',
+              '&:hover': { bgcolor: 'rgba(0,0,0,.65)' },
+            }}
+          >
+            {isFavorite ? (
+              <FavoriteIcon color='secondary' />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
+          </IconButton>
+        </Tooltip>
+      )}
     </Card>
   );
 }

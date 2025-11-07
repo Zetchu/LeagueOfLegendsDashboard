@@ -13,12 +13,11 @@ import {
   Grid,
   CircularProgress,
   Divider,
-  Tooltip,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import type { ChampionDetail } from '../types';
 import { getChampionDetail } from '../api';
-
+import { SkinCarousel } from '../skins';
 type Props = {
   open: boolean;
   onClose: () => void;
@@ -60,16 +59,19 @@ export function ChampionDialog({ open, onClose, version, championId }: Props) {
       <DialogTitle sx={{ pr: 6 }}>
         <Typography
           variant='h5'
+          component='div'
           fontWeight={800}
         >
           {data?.name ?? championId}
         </Typography>
         <Typography
           variant='body2'
+          component='div'
           color='text.secondary'
         >
           {data?.title}
         </Typography>
+
         <IconButton
           aria-label='close'
           onClick={onClose}
@@ -254,31 +256,11 @@ export function ChampionDialog({ open, onClose, version, championId }: Props) {
               )}
 
               {tab === 3 && (
-                <Grid
-                  container
-                  spacing={1}
-                >
-                  {data.skins.map((sk) => (
-                    <Grid
-                      key={sk.id}
-                      size={{ xs: 6, md: 4 }}
-                    >
-                      <Tooltip
-                        title={sk.name === 'default' ? data.name : sk.name}
-                      >
-                        <Box
-                          sx={{
-                            height: 160,
-                            backgroundImage: `url(https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.id}_${sk.num}.jpg)`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            borderRadius: 2,
-                          }}
-                        />
-                      </Tooltip>
-                    </Grid>
-                  ))}
-                </Grid>
+                <SkinCarousel
+                  championId={data.id}
+                  championName={data.name}
+                  skins={data.skins}
+                />
               )}
             </Box>
           </>

@@ -3,3 +3,4 @@ export * from './api';
 export * from './hooks';
 export { default as ChampionGrid } from './components/ChampionGrid';
 export { ChampionCard } from './components/ChampionCard';
+export * as Skins from './skins';
